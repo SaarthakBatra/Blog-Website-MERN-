@@ -1,0 +1,65 @@
+https://youtube.com/playlist?list=PL4cUxeGkcC9hAJ-ARcYq_z6lDZV7kT1xD&si=B7JcAQ-sFPMugEmT
+
+#Setup
+
+    1. Open Terminal in project directory and install, 
+        a. [npm init -y], For initializing node
+        b. [npm i bcrypt connect-mongo cookie-parser dotenv ejs express express-ejs-layouts express-session jsonwebtoken method-override mongoose]
+        c. [npm i nodemon --save-dev]
+
+    2. Open the project directory and create, 
+        a. File [.gitignore] -> Excludes the files from git push
+        b. File [.env] -> Contains username, pass and other important environmental keys
+        c. File [app.js]
+        d. Folder [public], to contain all images, js etc. 
+        e. Folder [server/routes]
+        f. File [server/routes/main.js] 
+        g. Folder [views/layouts]
+        h. File [views/layouts/main.ejs], for main layout
+        i. File [views/index.ejs] , for index page/ home page
+
+    3. Open .gitignore and add,
+        a. node_modules/
+        b. .env
+
+    4. Open package.json and add to script,
+        a. ["start": "app.js",]
+        b. ["dev": "nodemon app.js"]
+
+    5.Open app.js and add,
+        a. [require('dotenv').config();]
+        b. [const express = require('express');]
+        c. [const expressLayout = require('express-ejs-layouts');]
+        d. [const app = express();], to make an express application
+        e. [const PORT = 5555 || process.env.PORT], to create a port for express (process.env.PORT opens server port when published)
+        f. [app.use(express.static('public'));], to define the public folder containing all images, js, css etc
+        g. [app.use(expressLayout);
+            app.set('layout', './layouts/main');
+            app.set('view engine', 'ejs');], to setup a templating engine
+        h. [app.use('/', require('./server/routes/main.js'));], to add out routes.
+        i. [app.listen(PORT, () => {
+                console.log(`App listening on port ${PORT}`)
+            });]
+        
+    6. Open server/routes/main.js then add,
+        a. [const express = require('express');], to use express routers
+        b. [const router = express.Router();]
+        c. [router.get('', (req, res) => {
+                res.send("Welcome to MERN project");
+            });], to test our server
+        d. [module.exports = router;]
+
+    7. Open views/layouts/main.ejs then add,
+        a. [const express = require('express');], to use express routers
+        b. [const router = express.Router();]
+        c. [router.get('', (req, res) => {
+                res.send("Welcome to MERN project");
+            });], to test our server
+        d. [module.exports = router;]
+
+#Page setup
+
+    1. Open server/routes/main.js then add,
+        a. [router.get('', (req, res) => {
+                res.render('index');
+            });], to test our server
